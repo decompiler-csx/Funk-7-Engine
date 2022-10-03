@@ -83,6 +83,7 @@ class PlayState extends MusicBeatState
 
 	var talking:Bool = true;
 	var songScore:Int = 0;
+	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
 
@@ -252,6 +253,11 @@ class PlayState extends MusicBeatState
 		// healthBar
 		add(healthBar);
 
+		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
+		scoreTxt.setFormat("assets/fonts/vcr.ttf", 16, FlxColor.WHITE, RIGHT);
+		scoreTxt.scrollFactor.set();
+		add(scoreTxt);
+
 		healthHeads = new FlxSprite();
 		var headTex = FlxAtlasFrames.fromSparrow(AssetPaths.healthHeads__png, AssetPaths.healthHeads__xml);
 		healthHeads.frames = headTex;
@@ -277,6 +283,7 @@ class PlayState extends MusicBeatState
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		healthHeads.cameras = [camHUD];
+		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -463,7 +470,7 @@ class PlayState extends MusicBeatState
 			daBeats += 1;
 		}
 
-		trace(unspawnNotes.length);
+		// trace(unspawnNotes.length);
 		// playerCounter += 1;
 
 		unspawnNotes.sort(sortByShit);
@@ -581,15 +588,15 @@ class PlayState extends MusicBeatState
 
 	private var paused:Bool = false;
 	var startedCountdown:Bool = false;
+	var canPause:Bool = true;
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		// trace("SONG POS: " + Conductor.songPosition);
-		// FlxG.sound.music.pitch = 2;
+		scoreTxt.text = "Score:" + songScore;
 
-		if (FlxG.keys.justPressed.ENTER && startedCountdown)
+		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -786,6 +793,8 @@ class PlayState extends MusicBeatState
 							dad.playAnim('singLEFT', true);
 					}
 
+					dad.holdTimer = 0;
+
 					if (SONG.needsVoices)
 						vocals.volume = 1;
 
@@ -822,7 +831,7 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		trace('SONG DONE' + isStoryMode);
+		canPause = false;
 
 		Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
@@ -838,10 +847,10 @@ class PlayState extends MusicBeatState
 
 				FlxG.switchState(new StoryMenuState());
 
-				StoryMenuState.weekUnlocked[1] = true;
+				StoryMenuState.weekUnlocked[2] = true;
 
-				//NGio.unlockMedal(60961);
-				//Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+				NGio.unlockMedal(60961);
+				Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 
 				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();
@@ -854,7 +863,10 @@ class PlayState extends MusicBeatState
 					difficulty = '-easy';
 
 				if (storyDifficulty == 2)
-					difficulty == '-hard';
+					difficulty = '-hard';
+
+				trace('LOADING NEXT SONG');
+				trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
 
 				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 				FlxG.switchState(new PlayState());
@@ -1014,6 +1026,8 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
+			boyfriend.holdTimer = 0;
+
 			var possibleNotes:Array<Note> = [];
 
 			notes.forEachAlive(function(daNote:Note)
@@ -1021,7 +1035,6 @@ class PlayState extends MusicBeatState
 				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate)
 				{
 					possibleNotes.push(daNote);
-					trace('NOTE-' + daNote.strumTime + ' ADDED');
 				}
 			});
 
@@ -1085,9 +1098,9 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if (upR || leftR || rightR || downR)
+		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
 		{
-			if (boyfriend.animation.curAnim.name.startsWith('sing'))
+			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
 				boyfriend.playAnim('idle');
 			}
@@ -1214,7 +1227,6 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
-		trace(note.noteData + ' note check here ' + keyP);
 		if (keyP)
 			goodNoteHit(note);
 		else
