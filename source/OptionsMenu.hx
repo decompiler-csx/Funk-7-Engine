@@ -1,5 +1,6 @@
 package;
 
+import flixel.text.FlxText;
 import flixel.FlxG;
 
 class OptionsMenu extends MusicBeatState
