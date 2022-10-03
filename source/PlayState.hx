@@ -1026,8 +1026,6 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
-			boyfriend.holdTimer = 0;
-
 			var possibleNotes:Array<Note> = [];
 
 			notes.forEachAlive(function(daNote:Note)
@@ -1098,9 +1096,9 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
+		if (upR || leftR || rightR || downR)
 		{
-			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+			if (boyfriend.animation.curAnim.name.startsWith('sing'))
 			{
 				boyfriend.playAnim('idle');
 			}
