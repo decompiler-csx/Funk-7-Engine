@@ -793,8 +793,6 @@ class PlayState extends MusicBeatState
 							dad.playAnim('singLEFT', true);
 					}
 
-					dad.holdTimer = 0;
-
 					if (SONG.needsVoices)
 						vocals.volume = 1;
 
@@ -849,8 +847,8 @@ class PlayState extends MusicBeatState
 
 				StoryMenuState.weekUnlocked[2] = true;
 
-				NGio.unlockMedal(60961);
-				Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+				//NGio.unlockMedal(60961);
+				//Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 
 				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();
