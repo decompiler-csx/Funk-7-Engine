@@ -1,15 +1,15 @@
-package ui;
+package;
 
 import flixel.FlxG;
 
 class OptionsMenu extends MusicBeatState
 {
-	var items:TextMenuList;
+	var items:FlxText;
 
 	override public function new(showDonate:Bool)
 	{
 		super();
-		add(items = new TextMenuList());
+		add(items = new FlxText());
 		createItem('preferences', function()
 		{
 			onSwitch.dispatch(PageName.Preferences);
@@ -35,7 +35,7 @@ class OptionsMenu extends MusicBeatState
 
 	public function createItem(label:String, callback:Dynamic, ?fireInstantly:Bool = false)
 	{
-		var item:TextMenuItem = items.createItem(0, 100 + 100 * items.length, label, Bold, callback);
+		var item:FlxText = items.createItem(0, 100 + 100 * items.length, label, Bold, callback);
 		item.fireInstantly = fireInstantly;
 		item.screenCenter(X);
 		return item;
