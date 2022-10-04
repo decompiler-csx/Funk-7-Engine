@@ -127,10 +127,15 @@ class Character extends FlxSprite
 				// GIRLFRIEND CODE
 				tex = FlxAtlasFrames.fromSparrow(AssetPaths.picoSpeaker__png, AssetPaths.picoSpeaker__xml);
 				frames = tex;
+				animation.addByPrefix('Pico shoot', 'Pico shoot', 24);
+				
 				addOffset('shoot1', 0, 0);
 				addOffset('shoot2', -1, -128);
 				addOffset('shoot3', 412, -64);
 				addOffset('shoot4', 439, -19);
+				
+				playAnim('Pico shoot');
+
 		}
 	}
 
