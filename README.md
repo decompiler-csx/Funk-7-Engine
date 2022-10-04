@@ -8,7 +8,7 @@ og repo/branch: https://github.com/Ty1991twitter/Funkin-Week7-0.2.1/tree/Funk-7-
 
 # W.i.p. Additions
 
- ° Ghost Tapping (if I can get the code to work properly)
+ ° Ghost Tapping (going to be in a serperate branch)
  
  
  ° Fully Functional Pause Menu  - DONE
