@@ -46,16 +46,8 @@ jobs:
           haxelib install newgrounds
           haxelib install markdown
           haxelib install HtmlParser
-          haxelib git polymod https://github.com/AngelDTF/haxe-polymod
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib install hxcpp-debug-server
-          haxelib git hscript-yoshiengine https://github.com/YoshiCrafter29/hscript-improved
-          haxelib git SScript https://github.com/TahirRollingArch/SScript.git
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
