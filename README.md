@@ -20,7 +20,7 @@ og repo/branch: https://github.com/Ty1991twitter/Funkin-Week7-0.2.1/tree/Funk-7-
  ° Week 7 Stuff - Just gotta fix offsets and alt animations
  
  
- ° Credits Menu - w.i.p.
+ ° Extra Freeplay Menu - w.i.p.
  
  
  ° Modding Compatibility - w.i.p.
