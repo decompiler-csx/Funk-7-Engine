@@ -324,6 +324,7 @@ class StoryMenuState extends MusicBeatState
 		grpWeekCharacters.members[0].animation.play(weekCharacters[curWeek][0]);
 		grpWeekCharacters.members[1].animation.play(weekCharacters[curWeek][1]);
 		grpWeekCharacters.members[2].animation.play(weekCharacters[curWeek][2]);
+		grpWeekCharacters.members[3].animation.play(weekCharacters[curWeek][3]);
 		txtTracklist.text = "Tracks\n";
 
 		var stringThing:Array<String> = weekData[curWeek];
