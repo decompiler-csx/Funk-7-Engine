@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  buildLinux:
+  buildHTML5:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -52,12 +52,12 @@ jobs:
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build Project.xml linux --app-version="4.0.0-${{ github.run_id}}"
+        run: haxelib run lime build Project.xml html5 --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: linuxBuild
-          path: 'export/release/linux/bin'
+          name: WebBuild
+          path: 'export/release/html5/bin'
   buildWindows:
     runs-on: windows-latest
 
