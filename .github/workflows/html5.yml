@@ -45,6 +45,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install newgrounds
           haxelib install markdown
+          haxelib git polymod https://github.com/larsiusprime/polymod.git
           haxelib install HtmlParser
           haxelib install hscript
           haxelib install hxcpp-debug-server
