@@ -20,6 +20,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import io.newgrounds.NG;
 import lime.app.Application;
 import lime.utils.Assets;
 import polymod.Polymod;
@@ -248,11 +249,11 @@ class TitleState extends MusicBeatState
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
 			#if !switch
-			//NGio.unlockMedal(60960);
+			NGio.unlockMedal(60960);
 
 			// If it's Friday according to da clock
 			if (Date.now().getDay() == 5)
-				//NGio.unlockMedal(61034);
+				NGio.unlockMedal(61034);
 			#end
 
 			titleText.animation.play('press');
