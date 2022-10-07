@@ -247,7 +247,8 @@ class Character extends FlxSprite
 			}
 		}
 	}
-
+		
+	}
 	override function update(elapsed:Float)
 	{
 		if (curCharacter != 'bf')
