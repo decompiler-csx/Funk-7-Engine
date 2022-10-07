@@ -2,11 +2,6 @@ bf
 dad
 gf
 spooky
-pico
-mom
-mom-car
+tankman
 bf-car
-parents-christmas
-monster-christmas
 bf-christmas
-gf-christmas
