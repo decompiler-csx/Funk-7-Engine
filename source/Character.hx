@@ -112,16 +112,30 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -30);
 				addOffset("singDOWN", -30, -40);
 				playAnim('idle');
-			case 'tankman':
-				tex = FlxAtlasFrames.fromSparrow('assets/shared/images/characters/tankmanCaptain.png', 'assets/shared/images/characters/Pico_FNF_assetss.xml');
+			case 'pico':
+				tex = FlxAtlasFrames.fromSparrow('assets/shared/images/characters/Pico_FNF_assetss.png', 'assets/shared/images/characters/Pico_FNF_assetss.xml');
 				frames = tex;
-				animation.addByPrefix('idle', "Tankman Idle Dance instance", 24);
-				animation.addByPrefix('singUP', 'Tankman UP note instance', 24, false);
-				animation.addByPrefix('singDOWN', 'Tankman DOWN note instance', 24, false);
-				animation.addByPrefix('singLEFT', 'Tankman Note Left instance', 24, false);
-				animation.addByPrefix('singRIGHT', 'Tankman Right Note instance', 24, false);
-				animation.addByPrefix('Ugh', 'TANKMAN UGH instance', 24, false);
-				animation.addByPrefix('prettygood', 'PRETTY GOOD tankman instance', 24, false);
+				animation.addByPrefix('idle', "Pico Idle Dance", 24);
+				animation.addByPrefix('singUP', 'pico Up note0', 24, false);
+				animation.addByPrefix('singDOWN', 'Pico Down Note0', 24, false);
+				if (isPlayer)
+				{
+					animation.addByPrefix('singLEFT', 'Pico NOTE LEFT0', 24, false);
+					animation.addByPrefix('singRIGHT', 'Pico Note Right0', 24, false);
+					animation.addByPrefix('singRIGHTmiss', 'Pico Note Right Miss', 24, false);
+					animation.addByPrefix('singLEFTmiss', 'Pico NOTE LEFT miss', 24, false);
+				}
+				else
+				{
+					// Need to be flipped! REDO THIS LATER!
+					animation.addByPrefix('singLEFT', 'Pico Note Right0', 24, false);
+					animation.addByPrefix('singRIGHT', 'Pico NOTE LEFT0', 24, false);
+					animation.addByPrefix('singRIGHTmiss', 'Pico NOTE LEFT miss', 24, false);
+					animation.addByPrefix('singLEFTmiss', 'Pico Note Right Miss', 24, false);
+				}
+
+				animation.addByPrefix('singUPmiss', 'pico Up note miss', 24);
+				animation.addByPrefix('singDOWNmiss', 'Pico Down Note MISS', 24);
 
 				playAnim('idle');
 
@@ -130,8 +144,10 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -68, -7);
 				addOffset("singLEFT", 65, 9);
 				addOffset("singDOWN", 200, -70);
-				addOffset('Ugh');
-				addOffset('prettygood');
+				addOffset("singUPmiss", -19, 67);
+				addOffset("singRIGHTmiss", -60, 41);
+				addOffset("singLEFTmiss", 62, 64);
+				addOffset("singDOWNmiss", 210, -28);
 
 				playAnim('idle');
 
@@ -174,32 +190,6 @@ class Character extends FlxSprite
 
 				flipX = true;
 
-			case 'bf-christmas':
-				var tex = FlxAtlasFrames.fromSparrow('assets/shared/images/characters/bfChristmas.png', 'assets/shared/images/characters/bfChristmas.xml');
-				frames = tex;
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-				animation.addByPrefix('hey', 'BF HEY', 24, false);
-
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset("hey", 7, 4);
-
-				flipX = true;
 			case 'bf-car':
 				var tex = FlxAtlasFrames.fromSparrow('assets/shared/images/characters/bfCar.png', 'assets/shared/images/characters/bfCar.xml');
 				frames = tex;
@@ -225,6 +215,12 @@ class Character extends FlxSprite
 
 				flipX = true;
 			
+		}
+
+		antialiasing = true;
+
+		playAnim('singUP');
+
 		if (isPlayer)
 		{
 			flipX = !flipX;
@@ -247,8 +243,7 @@ class Character extends FlxSprite
 			}
 		}
 	}
-		
-	}
+
 	override function update(elapsed:Float)
 	{
 		if (curCharacter != 'bf')
@@ -290,6 +285,10 @@ class Character extends FlxSprite
 		{
 			switch (curCharacter)
 			{
+				case 'mom':
+					playAnim('idle');
+				case 'mom-car':
+					playAnim('idle');
 				case 'bf':
 					playAnim('idle');
 				case 'bf-christmas':
@@ -297,6 +296,28 @@ class Character extends FlxSprite
 				case 'bf-car':
 					playAnim('idle');
 				case 'gf':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+
+				case 'gf-christmas':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+
+				case 'gf-car':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
@@ -316,7 +337,11 @@ class Character extends FlxSprite
 						playAnim('danceLeft');
 				case 'dad':
 					playAnim('idle');
+				case 'parents-christmas':
+					playAnim('idle');
 				case 'monster':
+					playAnim('idle');
+				case 'monster-christmas':
 					playAnim('idle');
 				case 'tankman':
 					playAnim('idle');
