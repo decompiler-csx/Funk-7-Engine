@@ -94,6 +94,7 @@
 	<haxelib name="flixel-ui" />
 	<haxelib name="newgrounds"/>
 	<haxelib name="markdown" />
+	<haxelib name="polymod"/>
 	<haxelib name="HtmlParser" />
 	<haxelib name="discord_rpc" if="desktop"/>
 
