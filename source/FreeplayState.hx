@@ -30,7 +30,7 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		songs = CoolUtil.coolTextFile('assets/data/freeplaySonglist.txt');
+		songs = CoolUtil.coolTextFile('assets/preload/data/freeplaySonglist.txt');
 
 		/* 
 			if (FlxG.sound.music != null)
@@ -63,7 +63,7 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 		
-		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/images/menuBGBlue.png');
+		var bg:FlxSprite = new FlxSprite().loadGraphic('assets/preload/images/menuBGBlue.png');
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
