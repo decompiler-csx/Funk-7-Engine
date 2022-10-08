@@ -13,7 +13,7 @@ class MenuCharacter extends FlxSprite
 
 		this.character = character;
 
-		var tex = FlxAtlasFrames.fromSparrow('assets/images/campaign_menu_UI_characters.png', 'assets/images/campaign_menu_UI_characters.xml');
+		var tex = FlxAtlasFrames.fromSparrow('assets/preload/images/campaign_menu_UI_characters.png', 'assets/preload/images/campaign_menu_UI_characters.xml');
 		frames = tex;
 
 		animation.addByPrefix('bf', "BF idle dance white", 24);
@@ -21,11 +21,7 @@ class MenuCharacter extends FlxSprite
 		animation.addByPrefix('gf', "GF Dancing Beat WHITE", 24);
 		animation.addByPrefix('dad', "Dad idle dance BLACK LINE", 24);
 		animation.addByPrefix('spooky', "spooky dance idle BLACK LINES", 24);
-		animation.addByPrefix('pico', "Pico Idle Dance", 24);
-		animation.addByPrefix('mom', "Mom Idle BLACK LINES", 24);
-		animation.addByPrefix('parents-christmas', "Parent Christmas Idle", 24);
-		// Parent Christmas Idle
-
+		animation.addByPrefix('tankman', "Tankman idle instance", 24);
 		animation.play(character);
 		updateHitbox();
 	}
