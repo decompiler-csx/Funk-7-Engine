@@ -117,7 +117,7 @@ class TitleState extends MusicBeatState
 			// https://github.com/HaxeFlixel/flixel-addons/pull/348
 
 			// var music:FlxSound = new FlxSound();
-			// music.loadStream('assets/music/freakyMenu' + TitleState.soundExt);
+			// music.loadStream('assets/preload/music/freakyMenu' + TitleState.soundExt);
 			// FlxG.sound.list.add(music);
 			// music.play();
 			FlxG.sound.playMusic('assets/preload/music/freakyMenu' + TitleState.soundExt, 0);
@@ -275,7 +275,7 @@ class TitleState extends MusicBeatState
 					FlxG.switchState(new MainMenuState());
 				}
 			});
-			// FlxG.sound.play('assets/music/titleShoot' + TitleState.soundExt, 0.7);
+			// FlxG.sound.play('assets/preload/music/titleShoot' + TitleState.soundExt, 0.7);
 		}
 
 		if (pressedEnter && !skippedIntro)
@@ -376,8 +376,20 @@ class TitleState extends MusicBeatState
 			// credTextShit.text += '\nNight';
 			case 15:
 				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+			
+			case 16:	
+				addMoreText('Funk'); // credTextShit.text += '\nFunk';
+			
+			case 17:
+				addMoreText('7'); // credTextShit.text += '\n7';	
+			
+			case 18:
+				addMoreText('Engine'); // credTextShit.text += '\nEngine'; 	
 
-			case 16:
+			case 19:
+				addMoreText('Rewritten'); // credTextShit.text += '\nRewritten'; 	
+
+			case 20:
 				skipIntro();
 		}
 	}
