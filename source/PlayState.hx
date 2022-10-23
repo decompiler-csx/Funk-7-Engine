@@ -84,6 +84,7 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
         var misses:Int = 0;
+	var accuracy:Int = 0.00;
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
@@ -595,7 +596,7 @@ class PlayState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-		scoreTxt.text = "Score:" + songScore + " | Misses:" + misses;
+		scoreTxt.text = "Score:" + songScore + " | "Misses:" + misses + " | Accuracy:" + accuracy;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
