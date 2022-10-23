@@ -84,7 +84,6 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
         var misses:Int = 0;
-	var accuracy:Int = 0.00;
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
