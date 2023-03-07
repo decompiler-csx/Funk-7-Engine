@@ -4,7 +4,11 @@
 
 Yeahh I'm making an engine out of this lmao
 
-og repo/branch: https://github.com/Ty1991twitter/Funkin-Week7-0.2.1/tree/Funk-7-Engine
+og repo/branch: https://github.com/SnesFX/Funkin-Week7-0.2.1/tree/Funk-7-Engine
+
+# NOTE
+
+* I AM NOT IN THE FNF COMMUNITY I'M JUST CONTINUING THIS TO LEARN MORE ABOUT HAXE.
 
 # W.i.p. Additions
 
