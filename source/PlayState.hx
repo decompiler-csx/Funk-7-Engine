@@ -83,7 +83,6 @@ class PlayState extends MusicBeatState
 
 	var talking:Bool = true;
 	var songScore:Int = 0;
-        var misses:Int = 0;
 	var scoreTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
@@ -471,7 +470,7 @@ class PlayState extends MusicBeatState
 			daBeats += 1;
 		}
 
-		// trace(unspawnNotes.length);
+		trace(unspawnNotes.length);
 		// playerCounter += 1;
 
 		unspawnNotes.sort(sortByShit);
@@ -595,7 +594,10 @@ class PlayState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-		scoreTxt.text = "Score:" + songScore + " | Misses:" + misses;
+		// trace("SONG POS: " + Conductor.songPosition);
+		// FlxG.sound.music.pitch = 2;
+
+		scoreTxt.text = "Score:" + songScore;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -831,6 +833,7 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 		canPause = false;
+		trace('SONG DONE' + isStoryMode);
 
 		Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
@@ -1032,6 +1035,7 @@ class PlayState extends MusicBeatState
 				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate)
 				{
 					possibleNotes.push(daNote);
+					trace('NOTE-' + daNote.strumTime + ' ADDED');
 				}
 			});
 
@@ -1095,13 +1099,13 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if (upR || leftR || rightR || downR)
-		{
-			if (boyfriend.animation.curAnim.name.startsWith('sing'))
-			{
-				boyfriend.playAnim('idle');
-			}
-		}
+//		if (upR || leftR || rightR || downR)
+//		{
+//			if (boyfriend.animation.curAnim.name.startsWith('sing'))
+//			{
+//				boyfriend.playAnim('idle');
+//			}
+//		}
 
 		playerStrums.forEach(function(spr:FlxSprite)
 		{
@@ -1144,7 +1148,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.06;
+			health -= 0.35;
 			if (combo > 5)
 			{
 				gf.playAnim('sad');
@@ -1224,6 +1228,7 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void
 	{
+		trace(note.noteData + ' note check here ' + keyP);
 		if (keyP)
 			goodNoteHit(note);
 		else
@@ -1243,7 +1248,7 @@ class PlayState extends MusicBeatState
 			if (note.noteData >= 0)
 				health += 0.023;
 			else
-				health += 0.004;
+				health += 0.010;
 
 			switch (note.noteData)
 			{
