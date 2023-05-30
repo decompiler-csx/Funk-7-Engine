@@ -12,7 +12,7 @@ import lime.utils.Assets;
 
 class FreeplayState extends MusicBeatState
 {
-	var songs:Array<String> = ["Bopeebo", "Dadbattle", "Fresh", "Tutorial", "Ugh", "Guns", "Stress", "Monster"];
+	var songs:Array<String> = ["Tutorial", "Ugh", "Guns", "Stress"];
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -38,12 +38,6 @@ class FreeplayState extends MusicBeatState
 		#if debug
 		isDebug = true;
 		#end
-
-		if (StoryMenuState.weekUnlocked[1] || isDebug)
-		{
-			songs.push('Spookeez');
-			songs.push('South');
-		}
 
 		// LOAD MUSIC
 
@@ -119,7 +113,7 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
-		scoreText.text = "PERSONAL BEST:" + lerpScore;
+		scoreText.text = "HIGHSCORE:" + lerpScore;
 
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
@@ -170,11 +164,11 @@ class FreeplayState extends MusicBeatState
 		switch (curDifficulty)
 		{
 			case 0:
-				diffText.text = "EASY";
+				diffText.text = "EASY >";
 			case 1:
-				diffText.text = 'NORMAL';
+				diffText.text = '< NORMAL >';
 			case 2:
-				diffText.text = "HARD";
+				diffText.text = "< HARD";
 		}
 	}
 
